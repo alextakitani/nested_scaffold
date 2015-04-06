@@ -1,23 +1,16 @@
-<%%= form_for([@<%= singular_table_name %>.<%= nested_parent_name %>, @<%= singular_table_name %>]) do |f| %>
-  <%% if @<%= singular_table_name %>.errors.any? %>
-    <div id="error_explanation">
-      <h2><%%= pluralize(@<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %> from being saved:</h2>
+<%%= parsley_form_for([@<%= singular_table_name %>.<%= nested_parent_name %>, @<%= singular_table_name %>]) , html: {class: 'form-horizontal' } do |f| %>
+<div class="box box-warning">
+<div class="box-header">
+<h3><%= eval(class_name).model_name.human%></h3>
+</div><!-- /.box-header -->
+<div class="box-body">
 
-      <ul>
-      <%% @<%= singular_table_name %>.errors.full_messages.each do |msg| %>
-        <li><%%= msg %></li>
-      <%% end %>
-      </ul>
-    </div>
-  <%% end %>
-
-<% for attribute in attributes -%>
-  <div class="field">
-    <%%= f.label :<%= attribute.name %> %><br />
-    <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
-  </div>
-<% end -%>
-  <div class="actions">
-    <%%= f.submit %>
-  </div>
+  <%- attributes.each do |attribute| -%>
+    <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> , wrapper_html: { class: "col-md-12" } %>
+  <%- end -%>
+  </div><!-- /.box-body -->
+  <div class="box-footer">
+  <%%= f.button :submit %>
+  </div><!-- /.box-footer -->
+</div>
 <%% end %>

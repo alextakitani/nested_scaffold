@@ -1,12 +1,21 @@
-<p id="notice"><%%= notice %></p>
+<div class="box box-warning">
 
-<% for attribute in attributes -%>
-<p>
-  <b><%= attribute.human_name %>:</b>
-  <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
-</p>
+<div class="box-header with-border">
+  <h3 class="box-title"><%= eval(class_name).model_name.human%></h3>
+</div>
 
+<div class="box-body">
+<%%= show_for @<%= singular_name %> do |s| %>
+<% attributes.each do |attribute| -%>
+  <%%= s.<%= attribute.reference? ? :association : :attribute %> :<%= attribute.name %> %>
 <% end -%>
+<%% end %>
+</div>
 
-<%%= link_to 'Edit', edit_<%= nested_parent_name %>_<%= singular_table_name %>_path(@<%= singular_table_name %>.<%= nested_parent_name %>, @<%= singular_table_name %>) %> |
-<%%= link_to 'Back', <%= nested_parent_name %>_<%= index_helper %>_path(@<%= singular_table_name %>.<%= nested_parent_name %>) %>
+<div class="box-footer">
+  <%%= link_to "Voltar", <%= nested_parent_name %>_<%= index_helper %>_path(@<%= singular_table_name %>.<%= nested_parent_name %>) %>
+  &nbsp;|&nbsp;
+  <%%= link_to "Editar", edit_<%= nested_parent_name %>_<%= singular_table_name %>_path(@<%= singular_table_name %>.<%= nested_parent_name %>, @<%= singular_table_name %>) %>
+</div>
+
+</div>
