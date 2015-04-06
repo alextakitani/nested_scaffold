@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ['Akira Matsuda', 'Alex Takitani']
-  s.date = '06-04-2015'
+  s.date = '2015-06-04'
   s.description = 'Nested scaffold generator for Rails 4'
   s.email = 'ronnie@dio.jp'
   s.extra_rdoc_files = ['LICENSE.txt', 'README.rdoc']
